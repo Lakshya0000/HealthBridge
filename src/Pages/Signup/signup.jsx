@@ -34,6 +34,17 @@ const Signup = () => {
       }
       if(response.ok){
         console.log(json)
+        try {
+          await fetch("http://localhost:9090/api/email/send-email", {
+            method: "POST",
+            body: JSON.stringify({ to: formData.email, subject: "Welcome!", message: "Hello welcome to health Bridge." }),
+            headers: {
+              "Content-type": "Application/JSON",
+            },
+          });
+        } catch (e) {
+          console.log(e);
+        }
         navigate('/login')
       }
     }
@@ -41,26 +52,6 @@ const Signup = () => {
       console.log(e)
     }
   }
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  const nameRef = useRef(null);
-  const aboutRef = useRef(null);
-  useEffect(() => {
-    return () => {
-      if (emailRef.current) {
-        emailRef.current.value = '';
-      }
-      if (passwordRef.current) {
-        passwordRef.current.value = '';
-      }
-      if (nameRef.current) {
-        nameRef.current.value = '';
-      }
-      if (aboutRef.current) {
-        aboutRef.current.value = '';
-      }
-    };
-  }, []);
   return (
     <>
       <section className="h-100 gradient-form pb-5">
@@ -104,7 +95,6 @@ const Signup = () => {
                           <Form.Control
                             type="email"
                             name="email"
-                            ref={emailRef}
                             placeholder="Email Address"
                             onChange={handleChange}
                           />
@@ -116,7 +106,6 @@ const Signup = () => {
                           <Form.Control
                             type="password"
                             name="password"
-                            ref={passwordRef}
                             placeholder="Password"
                             onChange={handleChange}
                           />
@@ -129,7 +118,6 @@ const Signup = () => {
                           <Form.Control
                             type="name"
                             name="name"
-                            ref={nameRef}
                             placeholder="name"
                             onChange={handleChange}
                           />
@@ -142,7 +130,6 @@ const Signup = () => {
                           <Form.Control
                             type="about"
                             name="about"
-                            ref={aboutRef}
                             placeholder="about"
                             onChange={handleChange}
                           />

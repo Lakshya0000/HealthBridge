@@ -45,18 +45,6 @@ const Login = () => {
       console.error("Error:", error);
     }
   };
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  useEffect(() => {
-    return () => {
-      if (emailRef.current) {
-        emailRef.current.value = "";
-      }
-      if (passwordRef.current) {
-        passwordRef.current.value = "";
-      }
-    };
-  }, []);
   return (
     <>
       <section className="h-100 gradient-form pb-5">
@@ -88,8 +76,8 @@ const Login = () => {
                             name="email"
                             id="form2Example11"
                             className="form-control"
-                            ref={emailRef}
                             placeholder="Email Address"
+                            value=""
                             required
                           />
                         </div>
@@ -102,7 +90,7 @@ const Login = () => {
                             id="form2Example22"
                             placeholder="Password"
                             className="form-control"
-                            ref={passwordRef}
+                            value=""
                             required
                           />
                         </div>
