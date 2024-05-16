@@ -1,18 +1,18 @@
 import React from 'react';
 import Appoinment from '../../../Pages/Home/Appoinment/Appoinment';
 import Banner from '../Banner/banner';
-import Detail from '../Detail/Detail';
+import Remedie from '../Remedie/remedie';
 import Safety from '../Safety/safety';
 
-const Service = () => {
+const Page = () => {
     return (
         <>
           <Banner /> 
-          <Detail />
+          <Remedie />
           <Safety />
           <Appoinment /> 
         </>
     );
 };
 
-export default Service;
+export default Page;

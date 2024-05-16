@@ -9,7 +9,7 @@ import Header from './Pages/Home/Header/Header.jsx';
 import Home from './Pages/Home/Home/Home.jsx';
 import Login from './Pages/Login/Login';
 import NotFound from './Pages/NotFound/NotFound';
-import Service from './Pages/Services/Service/Service';
+import Page from './Pages/Remedies/Page/page';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />
           <Route path='/about' element={<About />} />
-          <Route path='/remedies' element={<Service />} />
+          <Route path='/remedies' element={<Page />} />
           <Route path='/doctor' element={<Dentist />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/approved' element={<Approved />} />

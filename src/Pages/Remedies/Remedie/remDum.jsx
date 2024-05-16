@@ -4,11 +4,12 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import './remDum.css';
 
 export default function MultiActionAreaCard(props) {
     const {title, description, img} = props.remedie;
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} className='remcard'>
       <CardActionArea>
         <CardMedia
           component="img"

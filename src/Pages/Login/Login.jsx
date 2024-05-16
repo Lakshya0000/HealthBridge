@@ -1,5 +1,3 @@
-import { faFacebook, faGithub, faGoogle, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import './Login.css';
 
@@ -51,19 +49,6 @@ const Login = () => {
                                             <p className="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                                                 exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="row my-5">
-                                    <div className="col-12">
-                                        <div className="text-center">
-                                            <h4>or sign up with:</h4>
-                                            <div className="doctors-social">
-                                                <button className="loginbtn"><FontAwesomeIcon icon={faGoogle} /></button>
-                                                <button className="loginbtn"><FontAwesomeIcon icon={faGithub} /></button>
-                                                <button className="loginbtn"><FontAwesomeIcon icon={faFacebook} /></button>
-                                                <button className="loginbtn"><FontAwesomeIcon icon={faTwitter} /></button>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

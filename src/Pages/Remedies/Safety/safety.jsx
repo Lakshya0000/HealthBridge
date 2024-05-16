@@ -6,7 +6,7 @@ import './Safety.css';
 
 const Safety = () => {
     return (
-        <section className="about-content-sec">
+        <section className="about-content-sec safe">
             <Container>
                 <Row>
                     <Col md={12} lg={8} lg={{ order: 2 }} className="text-center">

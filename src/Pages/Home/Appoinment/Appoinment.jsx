@@ -10,12 +10,12 @@ const Appoinment = () => {
                 <Row>
                     <Col sm={12} md={12}>
                         <div className="section-title">
-                            <h1 className="mt-5">Request Appointment</h1>
+                            <h1 className="mt-5">Feedback</h1>
                         </div>
                         <div className="appoinment-form">
                             <form action="#" className="row">
                                 <Col md={6} lg={6}>
-                                    <input type="text" placeholder="Name" />
+                                    <input type="text" placeholder="Name"/>
                                 </Col>
                                 <Col md={6} lg={6}>
                                     <input type="email" placeholder="Email" />
