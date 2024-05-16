@@ -7,9 +7,13 @@ const Signup = () => {
   const [errors,setErrors]=useState({emailError:""})
 
   const [formData,setFormData]=useState({email:"", name:"", about:"",password:""})
+  const [emailData,setEmailData]=useState({to:"", subject:"Welcome",message:"You are welcome to health bridge"})
   const handleChange=(e)=>{
     const {name,value}=e.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    if(name==="email"){
+      setEmailData((prevEmailData) => ({ ...prevEmailData, to: value }));
+    }
     console.log(formData)
 
   }
@@ -37,7 +41,7 @@ const Signup = () => {
         try {
           await fetch("http://localhost:9090/api/email/send-email", {
             method: "POST",
-            body: JSON.stringify({ to: formData.email, subject: "Welcome!", message: "Hello welcome to health Bridge." }),
+            body: JSON.stringify(emailData),
             headers: {
               "Content-type": "Application/JSON",
             },
