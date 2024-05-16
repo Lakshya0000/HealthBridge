@@ -1,6 +1,6 @@
 import React from 'react';
 import './Login.css';
-
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     return (
@@ -36,7 +36,7 @@ const Login = () => {
 
                                                 <div className="d-flex align-items-center justify-content-center pb-4">
                                                     <p className="mb-0 me-2">Don't have an account?</p>
-                                                    <button type="button" className="btn btn-outline-danger">Create new</button>
+                                                    <Link to="/signup" type="button" className="btn btn-danger">Create New</Link>
                                                 </div>
 
                                             </form>

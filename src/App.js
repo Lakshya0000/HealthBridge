@@ -10,6 +10,7 @@ import Home from './Pages/Home/Home/Home.jsx';
 import Login from './Pages/Login/Login';
 import NotFound from './Pages/NotFound/NotFound';
 import Page from './Pages/Remedies/Page/page';
+import Signup from './Pages/Signup/signup.jsx';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/contact' element={<Contact />} />
           <Route path='/approved' element={<Approved />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />
