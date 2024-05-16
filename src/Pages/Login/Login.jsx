@@ -71,8 +71,7 @@ const Login = () => {
                                                 </div>
 
                                                 <div className="text-center pt-1 mb-5 pb-1">
-                                                    <button type="submit" className="theme-btn btn-fill" type="submit">Log
-                                                        in</button>
+                                                    <button type="submit" className="theme-btn btn-fill">Login</button>
                                                     <a className="text-muted text-decoration-none" href="#!">Forgot password?</a>
                                                 </div>
 
