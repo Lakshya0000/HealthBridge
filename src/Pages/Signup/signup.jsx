@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./signup.css";
 import Form from "react-bootstrap/Form";
 import Button from 'react-bootstrap/Button';
@@ -26,7 +26,7 @@ const Signup = () => {
         }
 
       })
-console.log(response.ok)
+      console.log(response.ok)
       const json=await response.json();
       if(!response.ok){
         setErrors({emailError:"user already exists"})
@@ -41,6 +41,26 @@ console.log(response.ok)
       console.log(e)
     }
   }
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const nameRef = useRef(null);
+  const aboutRef = useRef(null);
+  useEffect(() => {
+    return () => {
+      if (emailRef.current) {
+        emailRef.current.value = '';
+      }
+      if (passwordRef.current) {
+        passwordRef.current.value = '';
+      }
+      if (nameRef.current) {
+        nameRef.current.value = '';
+      }
+      if (aboutRef.current) {
+        aboutRef.current.value = '';
+      }
+    };
+  }, []);
   return (
     <>
       <section className="h-100 gradient-form pb-5">
@@ -84,6 +104,7 @@ console.log(response.ok)
                           <Form.Control
                             type="email"
                             name="email"
+                            ref={emailRef}
                             placeholder="Email Address"
                             onChange={handleChange}
                           />
@@ -95,6 +116,7 @@ console.log(response.ok)
                           <Form.Control
                             type="password"
                             name="password"
+                            ref={passwordRef}
                             placeholder="Password"
                             onChange={handleChange}
                           />
@@ -107,6 +129,7 @@ console.log(response.ok)
                           <Form.Control
                             type="name"
                             name="name"
+                            ref={nameRef}
                             placeholder="name"
                             onChange={handleChange}
                           />
@@ -119,6 +142,7 @@ console.log(response.ok)
                           <Form.Control
                             type="about"
                             name="about"
+                            ref={aboutRef}
                             placeholder="about"
                             onChange={handleChange}
                           />
