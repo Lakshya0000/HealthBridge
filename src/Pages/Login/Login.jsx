@@ -1,8 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Login.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const navigate=useNavigate()
+    const [user, setUserDetails] = useState({
+        email: "",
+        password: "",
+      });
+    
+      const changeHandler = (e) => {
+        const { name, value } = e.target;
+        setUserDetails({
+          ...user,
+          [name]: value,
+        });
+      };
+    const loginHandler =async (e) => {
+        e.preventDefault();
+        // setFormErrors(validateForm(user));
+        // setIsSubmit(true);
+        // if (!formErrors) {
+    
+        // }
+    
+        try {
+          const response = await fetch('http://localhost:9090/api/users/login', {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          const json = await response.json();
+          if(!response.ok){
+            console.log("not authenticated")
+          }
+          if (response.ok) {
+            console.log("Login successful");
+            console.log(json);
+            navigate('/'); // redirect to login page or another page
+          } 
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
     return (
         <>
             <section className="h-100 gradient-form pb-5">
@@ -18,18 +60,18 @@ const Login = () => {
                                                 <h4 className="mt-1 mb-5 pb-1">We are The Tech Titans Team</h4>
                                             </div>
                                             <p className="d-flex justify-content-start">Please login to your account</p>
-                                            <form>
+                                            <form onSubmit={loginHandler}>
                                                 <div className="form-outline mb-4">
-                                                    <input type="email" id="form2Example11" className="form-control"
+                                                    <input onChange={changeHandler} type="email" name="email" id="form2Example11" className="form-control"
                                                         placeholder="Email Address" required />
                                                 </div>
 
                                                 <div className="form-outline mb-4">
-                                                    <input type="password" id="form2Example22" placeholder="Password" className="form-control" required />
+                                                    <input onChange={changeHandler} type="password"  name="password" id="form2Example22" placeholder="Password" className="form-control" required />
                                                 </div>
 
                                                 <div className="text-center pt-1 mb-5 pb-1">
-                                                    <button className="theme-btn btn-fill" type="submit">Log
+                                                    <button type="submit" className="theme-btn btn-fill" type="submit">Log
                                                         in</button>
                                                     <a className="text-muted text-decoration-none" href="#!">Forgot password?</a>
                                                 </div>

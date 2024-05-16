@@ -1,9 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import "./signup.css";
 import Form from "react-bootstrap/Form";
 import Button from 'react-bootstrap/Button';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Signup = () => {
+  const [errors,setErrors]=useState({emailError:""})
+
+  const [formData,setFormData]=useState({email:"", name:"", about:"",password:""})
+  const handleChange=(e)=>{
+    const {name,value}=e.target;
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    console.log(formData)
+
+  }
+  const navigate=useNavigate();
+
+  const handleSubmit=async (e)=>{
+    e.preventDefault();
+    try{
+      const response=await fetch("http://localhost:9090/api/users/",{
+        method:"POST",
+        body:JSON.stringify(formData),
+        headers:{
+          "Content-type":"Application/JSON"
+        }
+
+      })
+console.log(response.ok)
+      const json=await response.json();
+      if(!response.ok){
+        setErrors({emailError:"user already exists"})
+        console.log(errors)
+      }
+      if(response.ok){
+        console.log(json)
+        navigate('/login')
+      }
+    }
+    catch(e){
+      console.log(e)
+    }
+  }
   return (
     <>
       <section className="h-100 gradient-form pb-5">
@@ -40,14 +77,15 @@ const Signup = () => {
                         Create a New Account
                       </h6>
                       <br />
-                      <Form>
-                        <Form.Group className="mb-3" controlId="formGroupText">
-                          <Form.Control placeholder="Name" />
-                        </Form.Group>
+                      <Form onSubmit={handleSubmit}>
+                         
                         <Form.Group className="mb-3" controlId="formGroupEmail">
+                          {errors.emailError?<p>{errors.emailError}</p>:null}
                           <Form.Control
                             type="email"
+                            name="email"
                             placeholder="Email Address"
+                            onChange={handleChange}
                           />
                         </Form.Group>
                         <Form.Group
@@ -56,15 +94,36 @@ const Signup = () => {
                         >
                           <Form.Control
                             type="password"
+                            name="password"
                             placeholder="Password"
+                            onChange={handleChange}
                           />
                         </Form.Group>
-                        <Form.Group controlId="formGridRole">
-                          <Form.Select defaultValue="Role">
-                            <option value="doctor">Doctor</option>
-                            <option value="user">User</option>
-                          </Form.Select>
+
+                        <Form.Group
+                          className="mb-3"
+                          controlId="formGroupPassword"
+                        >
+                          <Form.Control
+                            type="name"
+                            name="name"
+                            placeholder="name"
+                            onChange={handleChange}
+                          />
                         </Form.Group>
+
+                        <Form.Group
+                          className="mb-3"
+                          controlId="formGroupPassword"
+                        >
+                          <Form.Control
+                            type="about"
+                            name="about"
+                            placeholder="about"
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                        
                         <br />
                         <Button variant="primary" type="submit">
                           Submit
