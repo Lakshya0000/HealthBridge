@@ -1,8 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useLocation } from "react";
 import "./signup.css";
 import Form from "react-bootstrap/Form";
 import Button from 'react-bootstrap/Button';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 const Signup = () => {
   const [errors,setErrors]=useState({emailError:""})
 
@@ -17,8 +21,25 @@ const Signup = () => {
     console.log(formData)
 
   }
-  const navigate=useNavigate();
-
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const nameRef = useRef(null);
+  const aboutRef = useRef(null);
+  const navigate = useNavigate();
+  const clearInputFields = () => {
+    if (emailRef.current) {
+      emailRef.current.value = '';
+    }
+    if (passwordRef.current) {
+      passwordRef.current.value = '';
+    }
+    if (nameRef.current) {
+      nameRef.current.value = '';
+    }
+    if (aboutRef.current) {
+      aboutRef.current.value = '';
+    }
+  };
   const handleSubmit=async (e)=>{
     e.preventDefault();
     try{
@@ -34,6 +55,7 @@ const Signup = () => {
       const json=await response.json();
       if(!response.ok){
         setErrors({emailError:"user already exists"})
+        toast.error("User already exists")
         console.log(errors)
       }
       if(response.ok){
@@ -49,10 +71,13 @@ const Signup = () => {
         } catch (e) {
           console.log(e);
         }
-        navigate('/login')
+        toast.success("Signup successful")
+        navigate('/')
+        clearInputFields();
       }
     }
     catch(e){
+      toast.warn("Something went wrong");
       console.log(e)
     }
   }
@@ -99,6 +124,7 @@ const Signup = () => {
                           <Form.Control
                             type="email"
                             name="email"
+                            ref={emailRef}
                             placeholder="Email Address"
                             onChange={handleChange}
                           />
@@ -110,6 +136,7 @@ const Signup = () => {
                           <Form.Control
                             type="password"
                             name="password"
+                            ref={passwordRef}
                             placeholder="Password"
                             onChange={handleChange}
                           />
@@ -122,6 +149,7 @@ const Signup = () => {
                           <Form.Control
                             type="name"
                             name="name"
+                            ref={nameRef}
                             placeholder="name"
                             onChange={handleChange}
                           />
@@ -134,6 +162,7 @@ const Signup = () => {
                           <Form.Control
                             type="about"
                             name="about"
+                            ref={aboutRef}
                             placeholder="about"
                             onChange={handleChange}
                           />
