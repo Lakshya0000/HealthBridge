@@ -77,7 +77,7 @@ const Appoinment = () => {
                                 <Col md={12} lg={12}>
                                     <textarea name="Message" cols="30" rows="10" placeholder="Message" onChange={handleChange} required></textarea>
                                 </Col>
-                                <Link to="/login"><button className="theme-btn btn-fill form-btn mt-5">Submit</button></Link>
+                                <button className="theme-btn btn-fill form-btn mt-5" type="submit" name="submit">Submit</button>
                             </form>
                         </div>
                     </Col>
