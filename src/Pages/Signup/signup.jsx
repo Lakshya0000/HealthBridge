@@ -42,6 +42,7 @@ const Signup = () => {
   };
   const handleSubmit=async (e)=>{
     e.preventDefault();
+    clearInputFields();
     try{
       const response=await fetch("http://localhost:9090/api/users/",{
         method:"POST",
@@ -73,7 +74,6 @@ const Signup = () => {
         }
         toast.success("Signup successful")
         navigate('/')
-        clearInputFields();
       }
     }
     catch(e){

@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
+import Spinner from 'react-bootstrap/Spinner';
 import "react-toastify/dist/ReactToastify.css";
 import './Appoinment.css';
 
@@ -20,10 +21,35 @@ const Appoinment = () => {
     const emaiMe= {
         to : "khushalmidha24@gmail.com",
         subject : "Feedback Recieved",
-        message : "Feedback Recieved from" + formData.email + "\n Name : " + formData.name + "\n Phone : " + formData.phone  + "\n Message : " + formData.message 
+        message : "Feedback Recieved from \n" + formData.email + "\n Name : " + formData.name + "\n Phone : " + formData.phone  + "\n Message : " + formData.message 
     }
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const emailRef = useRef(null);
+    const nameRef = useRef(null);
+    const messageRef = useRef(null);
+    const subjectRef = useRef(null);
+    const phoneRef = useRef(null);
+    const clearInputFields = () => {
+        if (emailRef.current) {
+          emailRef.current.value = '';
+        }
+        if (nameRef.current) {
+          nameRef.current.value = '';
+        }
+        if (messageRef.current) {
+          messageRef.current.value = '';
+        }
+        if (subjectRef.current) {
+          subjectRef.current.value = '';
+        }
+        if (phoneRef.current) {
+          phoneRef.current.value = '';
+        }
+      };
     const handleSubmit=async (e)=>{
         e.preventDefault();
+        setIsSubmitting(true);
+        clearInputFields();
         try {
             await fetch("http://localhost:9090/api/email/send-email", {
               method: "POST",
@@ -40,13 +66,16 @@ const Appoinment = () => {
                   "Content-type": "Application/JSON",
                 },
               });
+              setIsSubmitting(false);
               toast.success("Feedback sent successful")
             } catch (e) {
               console.log(e);
+              setIsSubmitting(false);
               toast.warn("Something went wrong!");
             }
           } catch (e) {
             console.log(e);
+            setIsSubmitting(false);
             toast.warn("Something went wrong!");
           }
 
@@ -63,21 +92,22 @@ const Appoinment = () => {
                         <div className="appoinment-form">
                             <form onSubmit={handleSubmit} className="row">
                                 <Col md={6} lg={6}>
-                                    <input type="text" name="name" placeholder="Name" onChange={handleChange} required/>
+                                    <input type="text" name="name" placeholder="Name" ref={nameRef} onChange={handleChange} required/>
                                 </Col>
                                 <Col md={6} lg={6}>
-                                    <input type="email" name="email" placeholder="Email" onChange={handleChange}   required/>
+                                    <input type="email" name="email" placeholder="Email" ref={emailRef} onChange={handleChange}   required/>
                                 </Col>
                                 <Col md={6} lg={6}>
-                                    <input type="phone" name="phone" placeholder="Phone" onChange={handleChange}  required/>
+                                    <input type="phone" name="phone" placeholder="Phone" ref={phoneRef} onChange={handleChange}  required/>
                                 </Col>
                                 <Col md={6} lg={6}>
-                                    <input type="text" name="subject" placeholder="Subject" onChange={handleChange}  required/>
+                                    <input type="text" name="subject" placeholder="Subject" ref={subjectRef} onChange={handleChange}  required/>
                                 </Col>
                                 <Col md={12} lg={12}>
-                                    <textarea name="Message" cols="30" rows="10" placeholder="Message" onChange={handleChange} required></textarea>
+                                    <textarea name="Message" cols="30" rows="10" placeholder="Message" ref={messageRef} onChange={handleChange} required></textarea>
                                 </Col>
-                                <button className="theme-btn btn-fill form-btn mt-5" type="submit" name="submit">Submit</button>
+                                <div className="d-flex align-items-center justify-content-center pb-4"><button className="theme-btn btn-fill form-btn mt-5" type="submit" name="submit">{isSubmitting && <Spinner animation="border" />}Submit</button></div>
+                                
                             </form>
                         </div>
                     </Col>

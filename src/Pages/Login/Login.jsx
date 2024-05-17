@@ -18,6 +18,7 @@ const Login = () => {
   };
   const loginHandler = async (e) => {
     e.preventDefault();
+    
     // setFormErrors(validateForm(user));
     // setIsSubmit(true);
     // if (!formErrors) {
@@ -77,7 +78,6 @@ const Login = () => {
                             id="form2Example11"
                             className="form-control"
                             placeholder="Email Address"
-                            value=""
                             required
                           />
                         </div>
@@ -90,7 +90,6 @@ const Login = () => {
                             id="form2Example22"
                             placeholder="Password"
                             className="form-control"
-                            value=""
                             required
                           />
                         </div>
