@@ -26,6 +26,7 @@ const Signup = () => {
   const nameRef = useRef(null);
   const aboutRef = useRef(null);
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const clearInputFields = () => {
     if (emailRef.current) {
       emailRef.current.value = '';
@@ -43,6 +44,7 @@ const Signup = () => {
   const handleSubmit=async (e)=>{
     e.preventDefault();
     clearInputFields();
+    setIsSubmitting(true);
     try{
       const response=await fetch("http://localhost:9090/api/users/",{
         method:"POST",
@@ -57,6 +59,7 @@ const Signup = () => {
       if(!response.ok){
         setErrors({emailError:"user already exists"})
         toast.error("User already exists")
+        setIsSubmitting(false);
         console.log(errors)
       }
       if(response.ok){
@@ -72,11 +75,13 @@ const Signup = () => {
         } catch (e) {
           console.log(e);
         }
+        setIsSubmitting(false);
         toast.success("Signup successful")
         navigate('/')
       }
     }
     catch(e){
+      setIsSubmitting(false);
       toast.warn("Something went wrong");
       console.log(e)
     }

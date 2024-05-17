@@ -1,9 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Spinner from 'react-bootstrap/Spinner';
 
 const Login = () => {
   const navigate = useNavigate();
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   const [user, setUserDetails] = useState({
     email: "",
     password: "",
@@ -16,9 +20,19 @@ const Login = () => {
       [name]: value,
     });
   };
+  const clearInputFields = () => {
+    if (emailRef.current) {
+      emailRef.current.value = '';
+    }
+    if (passwordRef.current) {
+      passwordRef.current.value = '';
+    }
+  };
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const loginHandler = async (e) => {
     e.preventDefault();
-    
+    setIsSubmitting(true);
+    clearInputFields();
     // setFormErrors(validateForm(user));
     // setIsSubmit(true);
     // if (!formErrors) {
@@ -36,14 +50,20 @@ const Login = () => {
       const json = await response.json();
       if (!response.ok) {
         console.log("not authenticated");
+        setIsSubmitting(false);
+        toast.error("Invalid credentials");
       }
       if (response.ok) {
         console.log("Login successful");
         console.log(json);
+        setIsSubmitting(false);
+        toast.success("Login successful");
         navigate("/"); // redirect to login page or another page
       }
     } catch (error) {
       console.error("Error:", error);
+      setIsSubmitting(false);
+      toast.warn("Something went wrong");
     }
   };
   return (
@@ -96,7 +116,7 @@ const Login = () => {
 
                         <div className="text-center pt-1 mb-5 pb-1">
                           <button type="submit" className="theme-btn btn-fill">
-                            Login
+                          {isSubmitting && <Spinner animation="border" />}Login
                           </button>
                           <a
                             className="text-muted text-decoration-none"
