@@ -104,9 +104,9 @@ const Appoinment = () => {
                                     <input type="text" name="subject" placeholder="Subject" ref={subjectRef} onChange={handleChange}  required/>
                                 </Col>
                                 <Col md={12} lg={12}>
-                                    <textarea name="Message" cols="30" rows="10" placeholder="Message" ref={messageRef} onChange={handleChange} required></textarea>
+                                    <textarea name="message" cols="30" rows="10" placeholder="Message" ref={messageRef} onChange={handleChange} required></textarea>
                                 </Col>
-                                <div className="d-flex align-items-center justify-content-center pb-4"><button className="theme-btn btn-fill form-btn mt-5" type="submit" name="submit">{isSubmitting && <Spinner animation="border" />}Submit</button></div>
+                                <div className="d-flex align-items-center justify-content-center pb-4"><button className="theme-btn btn-fill btn-lg form-btn mt-5" type="submit" name="submit" disabled={isSubmitting}>{isSubmitting && <Spinner animation="border" />}{!isSubmitting && "Submit"}</button></div>
                                 
                             </form>
                         </div>

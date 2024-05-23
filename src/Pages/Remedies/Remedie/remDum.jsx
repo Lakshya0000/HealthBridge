@@ -4,10 +4,14 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Link } from 'react-router-dom';
 import './remDum.css';
+
+
 
 export default function MultiActionAreaCard(props) {
     const {title, description, img} = props.remedie;
+    let src = "/" + title;
   return (
     <Card sx={{ maxWidth: 345 }} className='remcard'>
       <CardActionArea>
@@ -27,9 +31,9 @@ export default function MultiActionAreaCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Link to={src}><Button size="small" color="primary">
           Read More
-        </Button>
+        </Button></Link>
       </CardActions>
     </Card>
   );

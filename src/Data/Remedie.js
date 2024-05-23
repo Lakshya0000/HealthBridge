@@ -1,38 +1,38 @@
 export const FakeRemedies = [
     {
         "id": "001",
-        "title": "Dr. Suresh",
-        "description": "Physician",
+        "title": "Cough",
+        "description": "Normal",
         "img": "https://i.ibb.co/pz92gsK/d1.png"
     },
     {
         "id": "002",
-        "title": "Dr. Rakesh",
-        "description": "Skin Doctor",
+        "title": "Fever",
+        "description": "Normal",
         "img": "https://i.ibb.co/yRcJ55b/d2.png"
     },
     {
         "id": "003",
-        "title": "Dr. Ambika",
-        "description": "Neurologist",
+        "title": "StomachAche",
+        "description": "Normal",
         "img": "https://i.ibb.co/zJXZcqW/d3.png"
     },
     {
         "id": "004",
-        "title": "Dr. Mahesh",
-        "description": "Cardiologist",
+        "title": "Vomiting",
+        "description": "Normal",
         "img": "https://i.ibb.co/pz92gsK/d1.png"
     },
     {
         "id": "005",
-        "title": "Dr. Amit",
-        "description": "Oral Surgeon",
+        "title": "HeadAche",
+        "description": "Normal",
         "img": "https://i.ibb.co/pz92gsK/d1.png"
     },
     {
         "id": "006",
-        "title": "Dr. Tarachand",
-        "description": "Psychiatrist",
+        "title": "BodyPain",
+        "description": "Normal",
         "img": "https://i.ibb.co/pz92gsK/d1.png"
     }
 ]

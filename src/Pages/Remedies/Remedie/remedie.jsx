@@ -26,4 +26,6 @@ const Remedie = () => {
     );
 };
 
+
+
 export default Remedie;

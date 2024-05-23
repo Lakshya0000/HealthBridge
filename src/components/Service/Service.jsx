@@ -10,7 +10,7 @@ const Service = () => {
                 <Row>
                     <Col sm={12}>
                         <div className="section-title text-center">
-                            <h1>Treatments</h1>
+                            <h1 style={{color:"white"}}>Treatments</h1>
                         </div>
                     </Col>
                 </Row>

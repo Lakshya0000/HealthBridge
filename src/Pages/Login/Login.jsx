@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Spinner from 'react-bootstrap/Spinner';
 
-const Login = () => {
+const Login = ({isloggedin , setisloggedin, email, setemail}) => {
   const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -32,6 +32,7 @@ const Login = () => {
   const loginHandler = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setemail(user.email);
     clearInputFields();
     // setFormErrors(validateForm(user));
     // setIsSubmit(true);
@@ -58,12 +59,13 @@ const Login = () => {
         console.log(json);
         setIsSubmitting(false);
         toast.success("Login successful");
-        navigate("/"); // redirect to login page or another page
+        setisloggedin(true);
+        navigate("/"); 
       }
     } catch (error) {
       console.error("Error:", error);
       setIsSubmitting(false);
-      toast.warn("Something went wrong");
+      toast.warn("Invalid Credentials");
     }
   };
   return (
@@ -115,8 +117,8 @@ const Login = () => {
                         </div>
 
                         <div className="text-center pt-1 mb-5 pb-1">
-                          <button type="submit" className="theme-btn btn-fill">
-                          {isSubmitting && <Spinner animation="border" />}Login
+                          <button type="submit" className="theme-btn btn-fill" disabled={isSubmitting}>
+                          {isSubmitting && <Spinner animation="border" />}{!isSubmitting && "Login"}
                           </button>
                           <a
                             className="text-muted text-decoration-none"

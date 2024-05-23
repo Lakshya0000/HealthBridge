@@ -1,9 +1,9 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { Col, Container, NavLink, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Footer.css'
 
-const Footer = () => {
+const Footer = ({isloggedin , setisloggedin}) => {
     return (
         <div className="footer-bg">
             <Container>
@@ -30,7 +30,7 @@ const Footer = () => {
                                 <NavLink className="footer-link" href='/contact'>Contact</NavLink>
                                 <NavLink className="footer-link" href='/not'>Meet the Team</NavLink>
                                 <NavLink className="footer-link" href='/not'>Patient Form</NavLink>
-                                <NavLink className="footer-link" href='/login'>Account Login</NavLink>
+                                <NavLink className="footer-link" href={isloggedin? '/':'/login'}>Account Login</NavLink>
                             </div>
                         </div>
                     </Col>

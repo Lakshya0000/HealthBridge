@@ -5,9 +5,10 @@ import Button from 'react-bootstrap/Button';
 import { Link, useNavigate} from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Spinner from 'react-bootstrap/Spinner';
 
 
-const Signup = () => {
+const Signup = ({isloggedin , setisloggedin, email, setemail}) => {
   const [errors,setErrors]=useState({emailError:""})
 
   const [formData,setFormData]=useState({email:"", name:"", about:"",password:""})
@@ -77,6 +78,8 @@ const Signup = () => {
         }
         setIsSubmitting(false);
         toast.success("Signup successful")
+        setemail(formData.email);
+        setisloggedin(true);
         navigate('/')
       }
     }
@@ -174,8 +177,8 @@ const Signup = () => {
                         </Form.Group>
                         
                         <br />
-                        <Button variant="primary" type="submit">
-                          Submit
+                        <Button variant="primary" type="submit" disabled={isSubmitting}>
+                        {isSubmitting && <Spinner animation="border" />}{!isSubmitting && "Submit"}
                         </Button>
                         <br /><br />
                         <div className="d-flex align-items-center justify-content-center pb-4">

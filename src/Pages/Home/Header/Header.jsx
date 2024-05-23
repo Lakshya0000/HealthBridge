@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../../Images/logo.png';
 import './Header.css';
 
-const Header = () => {
+const Header = ({isloggedin , setisloggedin, email, setemail}) => {
 
     return (
         <div className="head-bg">
@@ -23,7 +23,18 @@ const Header = () => {
                             <Link to="/remedies" className='list-item text-decoration-none'>Remedies</Link>
                             <Link to="/doctor" className='list-item text-decoration-none'>Doctor</Link>
                             <Link to="/contact" className='list-item text-decoration-none'>Contact</Link>             
-                            <Link to="/login" type="button" className="btn btn-danger">Login / Signup</Link>
+                            {isloggedin ? (
+                                <>
+                                <Navbar.Text className='list-item'>
+                                Welcome, {email}
+                                </Navbar.Text>
+                                <Link  type="button" className="btn btn-danger" onClick={()=>{setisloggedin(false); setemail('')}} to="/login">Logout</Link>
+                            </>) : (
+                                <Link to="/login" type="button" className="btn btn-danger">Login / Signup</Link>
+                                
+                            )
+
+                            }
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
