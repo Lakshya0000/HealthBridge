@@ -47,7 +47,7 @@ const Signup = ({isloggedin , setisloggedin, email, setemail}) => {
     clearInputFields();
     setIsSubmitting(true);
     try{
-      const response=await fetch("http://localhost:9090/api/users/",{
+      const response=await fetch("http://16.16.254.138:9090/api/users/",{
         method:"POST",
         body:JSON.stringify(formData),
         headers:{
@@ -66,7 +66,7 @@ const Signup = ({isloggedin , setisloggedin, email, setemail}) => {
       if(response.ok){
         console.log(json)
         try {
-          await fetch("http://localhost:9090/api/email/send-email", {
+          await fetch("http://16.16.254.138:9090/api/email/send-email", {
             method: "POST",
             body: JSON.stringify(emailData),
             headers: {

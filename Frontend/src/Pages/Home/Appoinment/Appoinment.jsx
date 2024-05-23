@@ -51,7 +51,7 @@ const Appoinment = () => {
         setIsSubmitting(true);
         clearInputFields();
         try {
-            await fetch("http://localhost:9090/api/email/send-email", {
+            await fetch("http://16.16.254.138:9090/api/email/send-email", {
               method: "POST",
               body: JSON.stringify(emailData),
               headers: {
@@ -59,7 +59,7 @@ const Appoinment = () => {
               },
             });
             try {
-              await fetch("http://localhost:9090/api/email/send-email", {
+              await fetch("http://16.16.254.138:9090/api/email/send-email", {
                 method: "POST",
                 body: JSON.stringify(emaiMe),
                 headers: {

@@ -41,7 +41,7 @@ const Login = ({isloggedin , setisloggedin, email, setemail}) => {
     // }
 
     try {
-      const response = await fetch("http://localhost:9090/api/users/login", {
+      const response = await fetch("http://16.16.254.138:9090/api/users/login", {
         method: "POST",
         body: JSON.stringify(user),
         headers: {
